@@ -1,6 +1,12 @@
 // inquirer package
 const inquirer = require("inquirer");
-
+// package to create files
+const fs = require('fs');
+// using the util module to use promisify 
+const util = require('util');
+// link file to generate markdown
+const genMarkdown = require('./utils/generateMarkdown');
+const { error } = require("console");
 // TODO: Create an array of questions for user input
 // validate is used to keep the user from skipping the question
 const questions = [
@@ -79,10 +85,29 @@ const questions = [
 ];
 
 // TODO: Create a function to write README file
-function writeToFile(fileName, data) {}
+function writeToFile(fileName, data) {
+  const dataStr = genMarkdown(data);
+
+  fs.writeFile(fileName, dataStr, (err) => {
+    if (err) {
+      console.log("Error, try again")
+    } else {
+      console.log(`README file successfully created as ${fileName}`);
+    }
+  })
+}
 
 // TODO: Create a function to initialize app
-function init() {}
+function init() {
+  inquirer
+  // pass through the array of questions
+    .prompt(questions)
+    // then pass response to the writeToFile function
+    .then((response) => {
+      console.log('your README here: ', response)
+      writeToFile(response);
+    })
+}
 
 // Function call to initialize app
 init();
