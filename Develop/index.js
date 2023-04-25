@@ -7,6 +7,8 @@ const util = require('util');
 // link file to generate markdown
 const genMarkdown = require('./utils/generateMarkdown');
 const { error } = require("console");
+// promisify for async
+const writeReadMe = util.promisify(fs.writeFile);
 // TODO: Create an array of questions for user input
 // validate is used to keep the user from skipping the question
 const questions = [
@@ -85,16 +87,14 @@ const questions = [
 ];
 
 // TODO: Create a function to write README file
-function writeToFile(fileName, data) {
-  const dataStr = genMarkdown(data);
-
-  fs.writeFile(fileName, dataStr, (err) => {
-    if (err) {
-      console.log("Error, try again")
-    } else {
-      console.log(`README file successfully created as ${fileName}`);
-    }
-  })
+async function writeToFile(answers, fileName) {
+  try {
+    let readInput = genMarkdown(answers);
+    await writeReadMe(`${fileName}`, readInput);
+    console.log("successfully created");
+  } catch (err) {
+    throw (err);
+  }
 }
 
 // TODO: Create a function to initialize app
@@ -102,10 +102,10 @@ function init() {
   inquirer
   // pass through the array of questions
     .prompt(questions)
-    // then pass response to the writeToFile function
-    .then((response) => {
-      console.log('your README here: ', response)
-      writeToFile(response);
+    // then pass answer to the writeToFile function
+    .then((answers) => {
+      console.log('your README here: ', answers)
+      writeToFile(answers);
     })
 }
 
