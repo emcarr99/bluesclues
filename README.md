@@ -1,3 +1,9 @@
-# Professional README Generator Starter Code
+# ${answers.title}
 
-[How to create a Professional README](https://coding-boot-camp.github.io/full-stack/github/professional-readme-guide)
+## ${answers.description}
+
+## ${answers.installation}
+
+## ${answers.usage}
+
+## ${answers.credits}

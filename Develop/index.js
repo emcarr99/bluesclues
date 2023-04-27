@@ -2,16 +2,11 @@
 const inquirer = require("inquirer");
 // package to create files
 const fs = require('fs');
-// using the util module to use promisify 
-const util = require('util');
-// link file to generate markdown
 const genMarkdown = require('./utils/generateMarkdown');
-const { error } = require("console");
-// promisify for async
-const writeReadMe = util.promisify(fs.writeFile);
-// TODO: Create an array of questions for user input
-// validate is used to keep the user from skipping the question
-const questions = [
+
+function init() {
+  inquirer
+    .prompt([
   {
     type: "input",
     name: "title",
@@ -76,38 +71,44 @@ const questions = [
     name: "license",
     message:
       "Choose the license you want, use your arrow keys to navigate through the choices.",
-    choices: [
-      {
-        name: "Apache 2.0",
-        value:
-          "[![License](https://img.shields.io/badge/License-Apache%202.0-7EA8BE)](https://opensource.org/licenses/Apache-2.0)",
-      },
-    ],
+    choices: [ 'MIT', 'Apache', 'Boost', 'GNUGPLv3', 'Mozilla', 'None'],
   },
-];
-
-// TODO: Create a function to write README file
-async function writeToFile(answers, fileName) {
-  try {
-    let readInput = genMarkdown(answers);
-    await writeReadMe(`${fileName}`, readInput);
-    console.log("successfully created");
-  } catch (err) {
-    throw (err);
+  {
+    type: "input",
+    name: 'github',
+    message: 'Enter your github username, do NOT include any @ symbols',
+    validate: (answer) => {
+      if (answer === "") {
+        return "Answer required, try again";
+      }
+      return true;
+    },
+  },
+  {
+    type: 'input',
+    name: 'email',
+    message: 'Enter your email',
+    validate: (answer) => {
+      if (answer === "") {
+        return "Answer required, try again";
+      }
+      return true;
+    },
   }
-}
+])
+.then((answers) => {
+  const newReadMe = genMarkdown(answers);
 
-// TODO: Create a function to initialize app
-function init() {
-  inquirer
-  // pass through the array of questions
-    .prompt(questions)
-    // then pass answer to the writeToFile function
-    .then((answers) => {
-      console.log('your README here: ', answers)
-      writeToFile(answers);
-    })
-}
+  fs.writeFile("newREADME.md", genMarkdown(answers), (err) => {
+    if (err) {
+      console.error(err);
+    } else {
+      console.log("success");
+    }
+  });
+});
+} 
+
 
 // Function call to initialize app
 init();
