@@ -35,7 +35,7 @@ function init() {
     type: "input",
     name: "installation",
     message:
-      "Enter step by step instructions to use your application. If no installation is required please provide a link to your deployed application.",
+      "Enter step by step instructions to install your application. If no installation is required please provide a link to your deployed application.",
     validate: (answer) => {
       if (answer === "") {
         return "Answer required, try again";
