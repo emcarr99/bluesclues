@@ -26,9 +26,8 @@ ${renderLicenseBadge(answers.license)}
 2. [Installation](#installation)
 3. [Usage](#usage)
 4. [License](#license)
-5. [Contributing](#contributing)
-6. [Tests](#tests)
-7. [Questions](#questions)
+5. [Credits](#credits)
+6. [Questions](#questions)
 
 ## Description
 ${answers.description}
