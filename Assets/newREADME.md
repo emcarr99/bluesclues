@@ -14,12 +14,10 @@
 The goal of this challenge was to create a README generator using Node.js and two different npm packages. 
 
 ## Installation
-To use this application you will need to clone this repo. Once cloned, in your code editor you will need to open the integrated terminal and then run the program by the command "node index.js"
+To use this application you will need to clone this repo. Once cloned, in your code editor you will need to open the intergrated terminal and then run the program by the command "node index.js"
 
 ## Usage
-Link to video demo: 
-
-Right click on the 'index.js' file to open integrated terminal and run "node index.js" command and then answer all questions (like I did to create this README)!
+Open intergrated terminal and run "node index.js" command and then answer all questions (like I did to create this README)!
 
 ## License
 MIT 
@@ -27,8 +25,7 @@ MIT
 ## Credits
 Badges: https://gist.github.com/lukas-h/2a5d00690736b4c3a7ba 
 
-## Questions
-Feel free to contact me with any questions! 
-[GitHub Profile](https://github.com/emcarr99)
 
+## Questions
+[GitHub Profile](https://github.com/undefined)
 [Email](mailto:lorenagracex@gmail.com)

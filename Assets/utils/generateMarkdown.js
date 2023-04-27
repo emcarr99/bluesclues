@@ -46,7 +46,8 @@ ${answers.credits}
 
 
 ## Questions
-[GitHub Profile](https://github.com/${answers.githubUsername})
+[GitHub Profile](https://github.com/${answers.github})
+
 [Email](mailto:${answers.email})
 `;
 }
