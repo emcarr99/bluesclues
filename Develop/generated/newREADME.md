@@ -7,8 +7,7 @@
 2. [Installation](#installation)
 3. [Usage](#usage)
 4. [License](#license)
-5. [Contributing](#contributing)
-6. [Tests](#tests)
+5. [Credits](#credits)
 7. [Questions](#questions)
 
 ## Description
