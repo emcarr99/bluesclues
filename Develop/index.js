@@ -99,7 +99,7 @@ function init() {
 .then((answers) => {
   const newReadMe = genMarkdown(answers);
 
-  fs.writeFile("newREADME.md", genMarkdown(answers), (err) => {
+  fs.writeFile("newREADME.md", newReadMe, (err) => {
     if (err) {
       console.error(err);
     } else {
