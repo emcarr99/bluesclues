@@ -2,14 +2,11 @@
 const inquirer = require("inquirer");
 // package to create files
 const fs = require('fs');
-// using the util module to use promisify 
-const util = require('util');
-// link file to generate markdown
 const genMarkdown = require('./utils/generateMarkdown');
-const { error } = require("console");
-// TODO: Create an array of questions for user input
-// validate is used to keep the user from skipping the question
-const questions = [
+
+function init() {
+  inquirer
+    .prompt([
   {
     type: "input",
     name: "title",
@@ -70,44 +67,47 @@ const questions = [
     },
   },
   {
-    type: "list",
+    type: "rawlist",
     name: "license",
     message:
       "Choose the license you want, use your arrow keys to navigate through the choices.",
-    choices: [
-      {
-        name: "Apache 2.0",
-        value:
-          "[![License](https://img.shields.io/badge/License-Apache%202.0-7EA8BE)](https://opensource.org/licenses/Apache-2.0)",
-      },
-    ],
+    choices: [ 'MIT', 'Apache', 'Boost', 'GNUGPLv3', 'Mozilla', 'None'],
   },
-];
+  {
+    type: "input",
+    name: 'github',
+    message: 'Enter your github username, do NOT include any @ symbols',
+    validate: (answer) => {
+      if (answer === "") {
+        return "Answer required, try again";
+      }
+      return true;
+    },
+  },
+  {
+    type: 'input',
+    name: 'email',
+    message: 'Enter your email',
+    validate: (answer) => {
+      if (answer === "") {
+        return "Answer required, try again";
+      }
+      return true;
+    },
+  }
+])
+.then((answers) => {
+  const newReadMe = genMarkdown(answers);
 
-// TODO: Create a function to write README file
-function writeToFile(fileName, data) {
-  const dataStr = genMarkdown(data);
-
-  fs.writeFile(fileName, dataStr, (err) => {
+  fs.writeFile("newREADME.md", newReadMe, (err) => {
     if (err) {
-      console.log("Error, try again")
+      console.error(err);
     } else {
-      console.log(`README file successfully created as ${fileName}`);
+      console.log("success");
     }
-  })
-}
-
-// TODO: Create a function to initialize app
-function init() {
-  inquirer
-  // pass through the array of questions
-    .prompt(questions)
-    // then pass response to the writeToFile function
-    .then((response) => {
-      console.log('your README here: ', response)
-      writeToFile(response);
-    })
-}
+  });
+});
+} 
 
 // Function call to initialize app
 init();
