@@ -67,7 +67,7 @@ function init() {
     },
   },
   {
-    type: "list",
+    type: "rawlist",
     name: "license",
     message:
       "Choose the license you want, use your arrow keys to navigate through the choices.",
@@ -108,7 +108,6 @@ function init() {
   });
 });
 } 
-
 
 // Function call to initialize app
 init();

@@ -19,14 +19,36 @@ function renderLicenseBadge(license) {
 function genMarkdown(answers) {
   return `# ${answers.title}
 
-## ${answers.description}
+${renderLicenseBadge(answers.license)}
 
-## ${answers.installation}
+## Table of Contents
+1. [Description](#description)
+2. [Installation](#installation)
+3. [Usage](#usage)
+4. [License](#license)
+5. [Contributing](#contributing)
+6. [Tests](#tests)
+7. [Questions](#questions)
 
-## ${answers.usage}
+## Description
+${answers.description}
 
-## ${answers.credits}
+## Installation
+${answers.installation}
 
+## Usage
+${answers.usage}
+
+## License
+${answers.license} 
+
+## Credits
+${answers.credits}
+
+
+## Questions
+[GitHub Profile](https://github.com/${answers.githubUsername})
+[Email](mailto:${answers.email})
 `;
 }
 
